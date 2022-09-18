@@ -1,14 +1,11 @@
-#incldue <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "tokenizer.h"
 
 int space_char(char c){ /*Returns 0 if whitespace character, return 1 if non whitespace*/
   int i=1;
-
-  if (c == ('\t') || c == (' '))
-    {
+  if (c == ('\t') || c == (' ')){
       i= 0;
-
     }
   return i;
 }
@@ -19,10 +16,14 @@ int non_space_char(char c){
   return 1;
 }
 char *word_start(char *str){
-  while (*str != '\0' && !isspace(*str ){
-      str++;
+  int i=0;
+  while (space_char(str[i]==1)){
+      if(str[i]=='\0'){
+	return NULL;
+      }
+      i++;
     }
-  return str;
+  return &str[i];
 }
   char *word_terminator(char *word){
     word=word_start(word);
@@ -30,7 +31,7 @@ char *word_start(char *str){
     if(word==NULL)
       return NULL;
     int i=0;
-    while( non_space_char(word[i])==1){
+    while(non_space_char(word[i])==1){
       if(word[i]=='\0')
 	return &word[i-1];
       i++;
@@ -56,16 +57,16 @@ char *word_start(char *str){
 	outStr[i]=inStr[i];
 	i++;
       }
-      outStr[i]="\0"; //set the end of String
+      outStr[i]='\0'; //set the end of String
       return outStr;
     }
     char **tokenizer (char* str){
       int i=0;
       int all=count_words(str);
-      char **tokens=malloc(all+1)*sizeof(char*));
+      char **tokens=malloc((all+1)*sizeof(char*));
     if(tokens==NULL){
       fprintf(stderr, "error: allocating memory\n");
-      i++;
+      return NULL;
     }
     tokens[i]=NULL;
     return tokens;
