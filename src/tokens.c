@@ -21,10 +21,10 @@ char *word_start(char *str){
   char *ptr = NULL;
 
   //while loop
-  while(s[i]!='\0'){
-      if(s[i]==' '){
-	  if(s[i+1]!='\0')
-	    ptr = &s[i+1];
+  while(str[i]!='\0'){
+      if(str[i]==' '){
+	  if(str[i+1]!='\0')
+	    ptr = &str[i+1];
 	  break;
 	}
       i++;
@@ -52,14 +52,14 @@ char *word_start(char *str){
       //scan all characters one by one
       while( *str){
 	//If next char is serperator, set the state as 0
-	if(*str==''|| *str=='\n'||*str =='\t'){
+	if(*str==' '|| *str=='\n'||*str =='\t'){
 	  state=0;
 	}
 	//If next char is not seperator
 	//and state is 0, then set state as 1
 	else if(state==0){
 	  state=1;
-	  ++counter
+	  ++counter;
 	    }
 	//move to next char
 	++str;
