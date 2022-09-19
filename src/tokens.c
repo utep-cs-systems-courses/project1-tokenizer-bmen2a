@@ -16,14 +16,22 @@ int non_space_char(char c){
   return 1;
 }
 char *word_start(char *str){
+  //variable declaration and initialization
   int i=0;
-  while (space_char(str[i]==1)){
-      if(str[i]=='\0'){
-	return NULL;
-      }
+  char *ptr = NULL;
+
+  //while loop
+  while(s[i]!='\0'){
+      if(s[i]==' '){
+	  if(s[i+1]!='\0')
+	    ptr = &s[i+1];
+	  break;
+	}
       i++;
     }
-  return &str[i];
+
+  //return pointer
+  return ptr;
 }
   char *word_terminator(char *word){
     word=word_start(word);
@@ -39,10 +47,22 @@ char *word_start(char *str){
       return &word[i];
   }
     int count_words(char *str){
-      int counter;
-      while( *str != '\0'){
-	str++;
-	counter++;
+      int counter=0;
+      int state=0;
+      //scan all characters one by one
+      while( *str){
+	//If next char is serperator, set the state as 0
+	if(*str==''|| *str=='\n'||*str =='\t'){
+	  state=0;
+	}
+	//If next char is not seperator
+	//and state is 0, then set state as 1
+	else if(state==0){
+	  state=1;
+	  ++counter
+	    }
+	//move to next char
+	++str;
       }
       return counter;
     }
@@ -74,10 +94,17 @@ char *word_start(char *str){
 void print_tokens(char **tokens){
   
   while(tokens!=NULL){
-    printf("%s\n", tokens);
+    printf("%s\n", *tokens);
     tokens++;
   }
 }
 void free_tokens(char **tokens){
-  free(tokens);// the free method releases the memory at that address
+  char**temp=tokens;
+
+  while(*temp!="") // Till we not find the last empty string
+    {
+      free(*temp);
+      temp++;
+    }
+  free(temp);
 }
