@@ -1,6 +1,5 @@
 #for convencienc, defin variable $(OBJS)to list of Object files
-OBJS=tester.o tokens.o history.o tokenizer.o
-
+OBJS=uimain.o tokens.o
 #default rule how to buil an object file (.o)
 #	 this rule include CFLAGS as one of cc's param
 CFLAGS= -g -O3 #-g for debug, -03 for optimizations

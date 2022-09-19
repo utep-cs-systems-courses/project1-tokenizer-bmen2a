@@ -3,17 +3,16 @@
 #include "tokenizer.h"
 
 int space_char(char c){ /*Returns 0 if whitespace character, return 1 if non whitespace*/
-  int i=1;
-  if (c == ('\t') || c == (' ')){
-      i= 0;
+  if (c == ('\t') || c == (' ')|| c==('\n')|| c==('\v')|| c==('\f')|c==('\r')){
+      return 0;
     }
-  return i;
+  return 1;
 }
 int non_space_char(char c){
-  if( c==('\t') || c ==(' ')){
-    return 0;
-  }
-  return 1;
+  if(c==('t') ||c ==(' ')){
+     return 1;
+    }
+   return 0;
 }
 char *word_start(char *str){
   //variable declaration and initialization
@@ -32,7 +31,7 @@ char *word_start(char *str){
 
   //return pointer
   return ptr;
-}
+}/*
   char *word_terminator(char *word){
     word=word_start(word);
     //check if its at the end already
@@ -107,4 +106,4 @@ void free_tokens(char **tokens){
       temp++;
     }
   free(temp);
-}
+  }**/

@@ -1,6 +1,5 @@
 #ifndef _TOKENIZER_
 #define _TOKENIZER_
-#include "tokens.c"
 
 /* Return true (non-zero) if c is a whitespace characer
    ('\t' or ' ').  
