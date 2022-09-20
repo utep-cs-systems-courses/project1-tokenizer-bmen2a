@@ -28,27 +28,40 @@ char *word_start(char *str){
 
   return str;
 }
-  char *word_terminator(char *word){
+  char *word_terminator(char *word)
+  {
+
     // word=word_start(word);
+
     while(non_space_char(word)){
+
       word++;
-      }
-      return word;
+
+    }
+
+    return word;
+
   }
-    int count_words(char *str){
-      int counter=0;
-      //scan all characters one by one
-      while(str==NULL){
-	//If next char is serperator, add to counter, this is the end of a word
-	//add to counter
-	 if(non_space_char(str)==1){
-	  counter++;
-	    }
-	//move to next char
-	str++;
-      }
-      return counter;
-    }/*
+
+int count_words(char *str){
+  int counter=1;
+  int state=0;
+  //scan all characters one by one
+  while(str){
+    //If next char is serperator, add to counter, this is the end of a word
+    //add to counter
+    if(non_space_char(str)==1){
+      state=0;
+    }
+    else if(state==0){
+      state=1;
+      counter++;
+    }
+    //move to next char
+    str++;
+  }
+  return counter;
+} /*
     char *copy_str(char *inStr, short len){
       int i=0;
       char *outStr= malloc((len+1)*sizeof(int));
