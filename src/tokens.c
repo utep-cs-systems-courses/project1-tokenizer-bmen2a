@@ -4,67 +4,51 @@
 
 int space_char(char c){ /*Returns 0 if whitespace character, return 1 if non whitespace*/
   if (c == ('\t') || c == (' ')|| c==('\n')|| c==('\v')|| c==('\f')|c==('\r')){
-      return 0;
+      return 1;
     }
-  return 1;
+  return 0;
 }
 int non_space_char(char c){
-  if(c==('t') ||c ==(' ')){
+  if(c !=('\t') && c !=(' ') && c !=('\0')){
      return 1;
     }
    return 0;
 }
 char *word_start(char *str){
-  //variable declaration and initialization
-  int i=0;
-  char *ptr = NULL;
+  if(str== '\0'){
+    return str;
+  }
+  while(space_char(str)) {
 
-  //while loop
-  while(str[i]!='\0'){
-      if(str[i]==' '){
-	  if(str[i+1]!='\0')
-	    ptr = &str[i+1];
-	  break;
-	}
-      i++;
+    if(non_space_char(*str)) {
+      return str;
     }
+    str++;
+  }
 
-  //return pointer
-  return ptr;
-}/*
+  return str;
+}
   char *word_terminator(char *word){
-    word=word_start(word);
-    //check if its at the end already
-    if(word==NULL)
-      return NULL;
-    int i=0;
-    while(non_space_char(word[i])==1){
-      if(word[i]=='\0')
-	return &word[i-1];
-      i++;
+    // word=word_start(word);
+    while(non_space_char(word)){
+      word++;
       }
-      return &word[i];
+      return word;
   }
     int count_words(char *str){
       int counter=0;
-      int state=0;
       //scan all characters one by one
-      while( *str){
-	//If next char is serperator, set the state as 0
-	if(*str==' '|| *str=='\n'||*str =='\t'){
-	  state=0;
-	}
-	//If next char is not seperator
-	//and state is 0, then set state as 1
-	else if(state==0){
-	  state=1;
-	  ++counter;
+      while(str==NULL){
+	//If next char is serperator, add to counter, this is the end of a word
+	//add to counter
+	 if(non_space_char(str)==1){
+	  counter++;
 	    }
 	//move to next char
-	++str;
+	str++;
       }
       return counter;
-    }
+    }/*
     char *copy_str(char *inStr, short len){
       int i=0;
       char *outStr= malloc((len+1)*sizeof(int));
