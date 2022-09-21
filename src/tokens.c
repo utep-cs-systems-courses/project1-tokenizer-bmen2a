@@ -45,11 +45,11 @@ char *word_start(char *str){
 
 int count_words(char *str){
   int counter=1;
-  int state=0;
+   int state=0;
   //scan all characters one by one
-  while(str){
     //If next char is serperator, add to counter, this is the end of a word
     //add to counter
+   while(str){
     if(non_space_char(str)==1){
       state=0;
     }
@@ -59,6 +59,7 @@ int count_words(char *str){
     }
     //move to next char
     str++;
+    //counter++;
   }
   return counter;
 } /*
