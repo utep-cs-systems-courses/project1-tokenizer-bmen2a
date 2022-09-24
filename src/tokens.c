@@ -63,6 +63,7 @@ int count_words(char *str){
   return counter;
 } 
     char *copy_str(char *inStr, short len){
+      //make memory avialalve for token
       char *ans=malloc((len+1)*sizeof(char));
       int i=0;
       while(i <len){
@@ -73,6 +74,7 @@ int count_words(char *str){
    
       return ans;
     }
+//helper mehtod
 short word_length(char *str){
   short size;
   char* start=word_start(str);
