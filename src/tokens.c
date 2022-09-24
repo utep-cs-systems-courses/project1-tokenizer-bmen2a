@@ -15,12 +15,9 @@ int non_space_char(char c){
    return 0;
 }
 char *word_start(char *str){
-  if(str== '\0'){
-    return str;
-  }
   while(space_char(str)) {
 
-    if(non_space_char(*str)) {
+    if(non_space_char(str)) {
       return str;
     }
     str++;
@@ -34,7 +31,9 @@ char *word_start(char *str){
     // word=word_start(word);
 
     while(non_space_char(word)){
-
+      if(space_char(word)){
+	return word;
+      }
       word++;
 
     }
@@ -44,64 +43,68 @@ char *word_start(char *str){
   }
 
 int count_words(char *str){
-  int counter=1;
-   int state=0;
-  //scan all characters one by one
-    //If next char is serperator, add to counter, this is the end of a word
-    //add to counter
-   while(str){
-    if(non_space_char(str)==1){
-      state=0;
+  int counter = 0;
+  while(str != '\0'){
+    // move to first char
+    str = word_start(str);
+    //check for space before the end
+    if(str[1]== '\0'){
+      break;
     }
-    else if(state==0){
-      state=1;
-      counter++;
+    counter++;
+    //move to terminate char
+    str =  word_terminator(str);
+    //check end of word
+
+    if(str[0] == '\0'){
+      break;
     }
-    //move to next char
-    str++;
-    //counter++;
   }
   return counter;
-} /*
+} 
     char *copy_str(char *inStr, short len){
+      char *ans=malloc((len+1)*sizeof(char));
       int i=0;
-      char *outStr= malloc((len+1)*sizeof(int));
-      if(outStr==NULL){
-	fprintf(stderr, "Error\n");
-	return NULL;
-      }//wihle loop to copy string
-      while(i<len){
-	outStr[i]=inStr[i];
+      while(i <len){
+	ans[i]=inStr[i];
 	i++;
       }
-      outStr[i]='\0'; //set the end of String
-      return outStr;
+      ans[i]= '\0';
+   
+      return ans;
     }
-    char **tokenizer (char* str){
-      int i=0;
-      int all=count_words(str);
-      char **tokens=malloc((all+1)*sizeof(char*));
-    if(tokens==NULL){
-      fprintf(stderr, "error: allocating memory\n");
-      return NULL;
-    }
-    tokens[i]=NULL;
-    return tokens;
+short word_length(char *str){
+  short size;
+  char* start=word_start(str);
+  char *end=word_terminator(start);
+  size=end-start;
+  return size;
+}
+    char **tokenize(char* str){
+      int size=count_words(str);
+      char **tokens = malloc((size + 1) * sizeof(char *));
+      int i;
+      int length;
+      char *p = str;
+      for(i = 0;i < size;i++){
+	p = word_start(p);
+	tokens[i] = copy_str(p, length);
+	p = word_terminator(p);
+      }
+      tokens[i] = '\0';
+      return tokens;
     }
 void print_tokens(char **tokens){
-  
-  while(tokens!=NULL){
-    printf("%s\n", *tokens);
-    tokens++;
+  int i=0;
+  while(tokens[i]){
+    printf("Token[%s]\n", tokens[i]);
+    i++;
   }
 }
-void free_tokens(char **tokens){
-  char**temp=tokens;
 
-  while(*temp!="") // Till we not find the last empty string
-    {
-      free(*temp);
-      temp++;
-    }
-  free(temp);
-  }**/
+void free_tokens(char **tokens){
+  for(int i=0; tokens[i] !='\0'; i++){
+    free(tokens[i]);
+  }
+  free(tokens);
+  }
