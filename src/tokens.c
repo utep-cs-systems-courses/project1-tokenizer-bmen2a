@@ -28,14 +28,14 @@ char *word_start(char *str){
   char *word_terminator(char *word)
   {
 
-    // word=word_start(word);
-
     while(non_space_char(word)){
+
       if(space_char(word)){
+
 	return word;
+
       }
       word++;
-
     }
 
     return word;
@@ -43,24 +43,13 @@ char *word_start(char *str){
   }
 
 int count_words(char *str){
-  int counter = 0;
+  int count =1;
   while(str != '\0'){
-    // move to first char
-    str = word_start(str);
-    //check for space before the end
-    if(str[1]== '\0'){
-      break;
-    }
-    counter++;
-    //move to terminate char
-    str =  word_terminator(str);
-    //check end of word
-
-    if(str[0] == '\0'){
-      break;
-    }
+    str=word_start(str);
+    str=word_terminator(str);
+    count++;
   }
-  return counter;
+  return count;
 } 
     char *copy_str(char *inStr, short len){
       //make memory avialalve for token
@@ -71,9 +60,9 @@ int count_words(char *str){
 	i++;
       }
       ans[i]= '\0';
-   
+      
       return ans;
-    }
+ }
 //helper mehtod
 short word_length(char *str){
   short size;
