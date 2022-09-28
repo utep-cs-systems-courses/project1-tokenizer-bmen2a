@@ -44,10 +44,13 @@ char *word_start(char *str){
 
 int count_words(char *str){
   int count =1;
-  while(str != '\0'){
-    str=word_start(str);
-    str=word_terminator(str);
-    count++;
+  while(str=='/0'){
+    //    str=word_start(str);
+    if(non_space_char(str)){
+      count++;
+    }
+    // str=word_terminator(str);
+    str++;
   }
   return count;
 } 
