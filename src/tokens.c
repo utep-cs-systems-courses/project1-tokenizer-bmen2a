@@ -40,7 +40,6 @@ char *word_start(char *str){
 
     return word;
 
-
   }
 int count_words(char *string){
   int words=0;
@@ -70,81 +69,53 @@ int count_words(char *string){
   return count;
 } 
     char *copy_str(char *inStr, short len){
-      //make memory avialalve for token
-      char *output = (char*) malloc(sizeof(char) * len+ 1);
+      char *copyStr = malloc(( len + 1) * sizeof(char));
 
+      int i;
 
+      for (i=0; i < len; i++){
 
-      if(!output){
-
-	exit(EXIT_FAILURE);
-
-      }
-
-
-
-      char *c = output;
-
-
-
-      for(short k=0; k < len; k++) {
-
-	*c = *inStr;
-
-	if(*c=='\0'){
-
-	  break;
-
-	}
-
-	c++;
-
-	inStr++;
+	copyStr[i] = inStr[i];
 
       }
 
-      *c=='\0';
+      copyStr[i] = '\0';
 
-      return output;
+      return copyStr;
  }
-//helper mehtod
-short word_length(char *str){
-  short size;
-  char* start=word_start(str);
-  char *end=word_terminator(start);
-  size=end-start;
-  return size;
-}
+
     char **tokenize(char* str){
-      int count = count_words(str);
+      int wcount = count_words(str);
 
-      char** tokens = (char**)malloc((count+1) * (sizeof(char*)));
+      char **token = malloc((wcount + 1) * sizeof(char*));
 
-      char* temp = str;
+       char **tokens = token;
 
-      for (int i = 0; i < count; i++)
+      char * endw = str;
 
-	{
+      while(wcount>0){
 
-	  temp = word_start(temp);
+	str = word_start(str);
 
-	  tokens[i] = copy_str(temp, (word_terminator(temp) - word_start(temp)));
+	endw = word_terminator(str);
 
-	  temp = word_terminator(temp);
+	*token = copy_str(str, endw - str);
 
-	}
+	str = endw;
 
-      tokens[count] = '\0';
+	token++;
+
+	wcount--;
+
+      }
+      token = '\0';
 
       return tokens;
-
     }		      
 void print_tokens(char **tokens){
   for(char** token = tokens; *token != 0; token++) {
-
-    printf("[%ld]%s\n", token - tokens, *token);
-
-  }
+    printf("Tokens=[%d]%s\n", token - tokens, *token);
+    }
 }
 
 void free_tokens(char **tokens){

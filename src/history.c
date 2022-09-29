@@ -1,45 +1,21 @@
 #include <stdio.h>
-
+#include <malloc.h>
 #include <stdlib.h>
-
 #include "history.h"
 
 /* Initialize the linked list to keep the history. */
 
-List* init_history()
+List *init_history()
 
 {
 
   // create a new List structure variable
 
-  List * list = malloc (sizeof (List));
-
-
-
-  // set it's head to NULL as it is empty
-
-  list ->root = NULL;
-
-
-
+  List *list = malloc (sizeof (List));
+  list -> root=malloc(sizeof(Item));
   // return the pointer to the List
 
   return list;
-
-}
-
-
-int str_len(char *str){
-
-  char *ptr = str;
-
-  while(ptr != "/0") {
-
-    ptr++;
-
-  }
-
-  return ptr-str;
 
 }
 
@@ -60,11 +36,9 @@ void add_history(List *list, char *str){
 
   tmp->id = pos;
 
-  tmp->word = str;
+  tmp->str = str;
+ 
 }
-
-
-
 char *get_history(List *list, int id)
 
 {
@@ -113,31 +87,18 @@ char *get_history(List *list, int id)
 
 
 
-void print_history(List *list)
-
-{
-
-  if (!list){
-
-    printf("History is empty, please enter some sentences.\n");
-
-  }
-
-  else{
-
+void print_history(List *list){
     Item *tmp = list->root;
 
-    while(tmp){
+    while(tmp!=NULL){
 
-      printf("%d: %s\n",tmp->id,tmp->next);
+      printf("%d- %s\n",tmp->id, tmp->str);
 
-      tmp->next;
+      tmp=tmp->next;
 
     }
 
     printf("\n");
-
-  }
 }
 void free_history(List *list)
 
