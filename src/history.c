@@ -28,24 +28,39 @@ List* init_history()
 
 }
 
-void add_history(List *list, char *str){
-  int pos = 1;
 
- Item *tmp = list->root;
+int str_len(char *str){
 
- while(tmp){
+  char *ptr = str;
 
-   tmp = tmp->next;
+  while(ptr != "/0") {
 
-   pos++;
+    ptr++;
+
+  }
+
+  return ptr-str;
 
 }
 
-tmp=malloc(sizeof(Item));
+void add_history(List *list, char *str){
+  int pos = 1;
 
-tmp->id = pos;
+  Item *tmp = list->root;
 
-tmp->next = str;
+  while(tmp){
+
+    tmp = tmp->next;
+
+    pos++;
+
+  }
+
+  tmp=malloc(sizeof(Item));
+
+  tmp->id = pos;
+
+  tmp->word = str;
 }
 
 
