@@ -78,7 +78,7 @@ void add_history(List *list, char *str){
 }
 char *get_history(List *list, int id){
   // initialize a variable to the start of the list
-  Item * ptr = list ->root;
+  Item *ptr = list ->root;
   // traverse the list till the end
 
   while (ptr != NULL)
@@ -95,7 +95,7 @@ char *get_history(List *list, int id){
       ptr = ptr -> next;
     }
   // if nothing's found, return empty string
-  return '\0';
+  return NULL;
 }
 
 void print_history(List *list){

@@ -7,10 +7,16 @@ int main(){
 
 	 List *hist = init_history();
 	 int i=0;
-	 //	  add_history(hist, "ajhebvhlb");
-
-	 // add_history(hist, "gg ez");
+	  add_history(hist, "ajhebvhlb");
+	  
+	  add_history(hist, "gg ez");
+	  char *id=get_history(hist, 1);
+	  printf("String stored into this %s \n",id);
 	 // print_history(hist);
+	  char s[]="My dog fless";
+	  char *pointer=s;
+	  char **tokens=tokenize(pointer);
+	  print_tokens(tokens);
 	  
 
 	 while(1){
@@ -35,7 +41,7 @@ int main(){
 		if(userResponse[0]=='g'){
 		  printf("Enter a number\n");
 		  fgets(userResponse[0],64,stdin);
-		  get_history(hist, 1);
+		  printf("%s \n",get_history(hist, userResponse));
 		}
 		
 	     }
