@@ -41,55 +41,21 @@ char *word_start(char *str){
     return word;
 
   }
+
 int count_words(char *string){
   int words=0;
-
-
-
   int count=0;
-
-
-
   while(*string != '\0') {
-
-
-
     if(non_space_char(*string) && words == 0) {
-
-
-
+      
       count++;
-
-
-
       words = 1;
-
-
-
     }
-
-
-
-    else if(space_char(*string) == 1 && words == 1) {
-
-
-
+    else if(space_char(*string) == 1 && words == 1){
       words = 0;
-
-
-
     }
-
-
-
     string++;
-
-
-
   }
-
-
-
   return count;
 }
    char *copy_str(char *inStr, short len){
@@ -109,29 +75,74 @@ int count_words(char *string){
  }
 
     char **tokenize(char* str){
-      int wcount = count_words(str);
-      char **token = malloc((wcount + 1) * sizeof(char*));
-      char **tokens = token;
-      char * endw = str;
-      while(wcount>0){
-	str = word_start(str);
-	endw = word_terminator(str);
-	*token = copy_str(str, endw - str);
-	str = endw;
-	token++;
-	wcount--;
-      }
+      int word_len = count_words(str);
 
-      token = '\0';
+      //Reserves memory used for string
+
+      char **tokens=(char**)malloc(sizeof(char*)*(word_len+1));
+
+
+
+      //Initializes the start and end pointers
+
+      char *start = str;
+
+      char *end = word_terminator(str);
+
+
+
+
+
+      for(int i = 0; i < word_len; i++)
+
+	{
+
+	  //Initializes the pointers to the next start and end of current word
+
+	  if(i > 0)
+
+	    {
+
+	      start = word_start(end);
+
+	      end = word_terminator(start);
+
+	    }
+
+	  //Finds the length of the current word
+
+	  int word_size = end - start;
+
+
+
+	  //Reserves memory for current word in 2D array
+
+	  tokens[i] = malloc(word_len*sizeof(char));
+
+
+
+	  //Populates array with the current word
+
+	  for(int j = 0;j < word_size;j++)
+
+	    {
+
+	      tokens[i][j] = start[j];
+
+	    }
+
+	}
+
+      //Last is 0
+
+      tokens[word_len] = 0;
+
       return tokens;
-
     }		      
 void print_tokens(char **tokens){
-  for(char** token = tokens; *token != 0; token++) {
-
-    printf("Tokens=[%d]%s\n", token - tokens, *token);
-
-  }
+  for(int i = 0; tokens[i] != 0; i++){
+      printf("tokens[%i] = %s\n",i,tokens[i]);
+    }
 }
 
 void free_tokens(char **tokens){
