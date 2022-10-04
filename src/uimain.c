@@ -25,12 +25,17 @@ int main(){
 	       // get_history(hist, i);
 	        print_history(hist);
 	       // free_history(hist);
-		printf("Woudl you like to clear history?(y or n)\n");
+		printf("Woudl you like to clear history or get history ?(c or g)\n");
 		printf("==");
 		fgets(userResponse, 64,stdin);
 		if(userResponse[0]=='y'){
+		  free_tokens(userResponse);
 		  free_history(hist);
-		  break;
+		}
+		if(userResponse[0]=='g'){
+		  printf("Enter a number\n");
+		  fgets(userResponse[0],64,stdin);
+		  get_history(hist, 1);
 		}
 		
 	     }
@@ -47,7 +52,7 @@ int main(){
 	       fgets(userResponse, 64, stdin);
 
      	       add_history(hist, userResponse);
-	       print_history(hist);
+	       // print_history(hist);
 	       char **tokens = tokenize(userResponse);
 
 	       print_tokens(tokens);
