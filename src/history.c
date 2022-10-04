@@ -111,14 +111,30 @@ void print_history(List *list){
 
     printf("\n");
 }
-void free_history(List *list)
+void free_history(List *list){
+  // initialize a variable to the start of the list
 
-{
-  Item *tmp;
-  Item *head = list->root;
-  while(head){
-    tmp = head;
-    head = head->next;
-    free(tmp);
-  }
+  Item * ptr = list ->root;
+
+
+
+  // initialize a pointer to store the node to be deleted
+
+  Item * delete = NULL;
+
+
+
+  // traverse the list till the end
+
+  while (ptr != NULL){
+      // set the delete to the node to be deleted
+      delete = ptr;
+      // update the ptr
+      ptr = ptr -> next;
+      // free up the string store in the item
+      free (delete -> str);
+      // free up the item itself
+      free (delete);
+    }
+  printf ("\nList and its string references freed!\n");
 }
