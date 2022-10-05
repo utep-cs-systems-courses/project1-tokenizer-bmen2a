@@ -3,19 +3,23 @@
 #include "history.h"
 #include "tokenizer.h"
 int main(){
-      	 char userResponse[20];
+      	 char userResponse[64];
 
-	 List *hist = init_history();
+	 List *history = init_history();
 	 int i=0;
-	 //	  add_history(hist, "ajhebvhlb");
+	 add_history(history, "ajhebvhlb");
 	  
-	 // add_history(hist, "gg ez");
-	 //char *id=get_history(hist, 1);
-	 // printf("String stored into this %s \n",id);
-	 // print_history(hist);
-	 // free_history(hist);
-	 //print_history(hist);
+	 add_history(history, "gg ez");
+	 print_history(history);
+	 printf("THis is all me history before this line\n");
+	 char *id=get_history(history, 1);
+	 printf("String stored into this %s \n",id);
+	  print_history(history);
+	  free_history(history);
+	  print_history(history);
 
+	  
+	  List *hist=init_history();
 	 while(1){
 
 	   printf("Access your history or tokenizeor quit? (h or t or q)\n");
@@ -37,8 +41,8 @@ int main(){
 		}
 		if(userResponse[0]=='g'){
 		  printf("Enter a number\n");
-		  fgets(i,64,stdin);
-		  printf("%s \n",get_history(hist, i));
+		  fgets(userResponse,64,stdin);
+		  printf("%s \n",get_history(hist, userResponse));
 		}
 		
 	     }
