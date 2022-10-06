@@ -4,7 +4,7 @@
 #include "tokenizer.h"
 int main(){
       	 char userResponse[64];
-	 /*
+	 /* 
 	 List *history = init_history();
 	 int i=0;
 	 add_history(history, "ajhebvhlb");
@@ -13,11 +13,15 @@ int main(){
 	 print_history(history);
 	 printf("THis is all me history before this line\n");
 	 char *id=get_history(history, 1);
-	 printf("String stored into this %s \n",id);
+	 printf("Strng in this gethistory()/n",id);
 	  print_history(history);
+	  printf("Before histoy is clear\n");
 	  free_history(history);
+	  printf("After history is clear");
 	  print_history(history);
 	 */
+	 int i;
+	  printf("====================\n");
 	  
 	  List *hist=init_history();
 	 while(1){
@@ -36,13 +40,13 @@ int main(){
 		printf("==");
 		fgets(userResponse, 64,stdin);
 		if(userResponse[0]=='y'){
-		  free_tokens(userResponse);
+		  free_tokens((char**)userResponse);
 		  free_history(hist);
 		}
 		if(userResponse[0]=='g'){
 		  printf("Enter a number\n");
 		  fgets(userResponse,64,stdin);
-		  printf("%s \n",get_history(hist, userResponse));
+		  printf("%s \n",get_history(hist,(int)userResponse));
 		}
 		
 	     }
