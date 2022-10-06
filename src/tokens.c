@@ -62,24 +62,38 @@ int count_words(char *string){
 
       return copyStr;
  }
+int word_length(char *str)
 
+{
+
+  char *tmpS = word_start((char*)str);
+
+  char *tmpE = word_terminator((char*)tmpS);
+
+  int i = 0;
+
+  int length = 0;
+
+  length = tmpE - tmpS;
+
+  //     printf("the size was %d",length);
+
+  return length;
+
+}
     char **tokenize(char* str){
       int word_len = count_words(str);
       //Reserves memory used for string
       char **tokens=(char**)malloc(sizeof(char*)*(word_len+1));
-      //Initializes the start and end pointers
-      char *start;
-      char *end;
-    
+      //Initializes the start and end point
       for(int i = 0; i < word_len; i++)
       {
-	str = word_start((char*)str);   
-	  end = word_terminator((char*)start);
-	  //Finds the length of the current word
-	  int word_size = end - str;
+	str = word_start((char*)str);
+	short len=word_length((char*)str);
 	  //Reserves memory for current word
-	  tokens[i] = copy_str((char*)start,word_size);
-	  str = end;
+	  tokens[i] = copy_str((char*)str,len);
+	  str=word_terminator((char*)str);  
+	  //str = end;
        }
       //Last is 0
       tokens[word_len] = 0;
