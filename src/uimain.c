@@ -4,7 +4,7 @@
 #include "tokenizer.h"
 int main(){
       	 char userResponse[64];
-
+	 /*
 	 List *history = init_history();
 	 int i=0;
 	 add_history(history, "ajhebvhlb");
@@ -17,7 +17,7 @@ int main(){
 	  print_history(history);
 	  free_history(history);
 	  print_history(history);
-
+	 */
 	  
 	  List *hist=init_history();
 	 while(1){
